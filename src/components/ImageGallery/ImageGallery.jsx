@@ -1,4 +1,5 @@
 import React from "react";
+import ImageCard from "./ImageCard/ImageCard";
 
 const ImageGallery = ({ gallery }) => {
   return (
@@ -8,11 +9,7 @@ const ImageGallery = ({ gallery }) => {
           gallery.map((image) => (
             <li key={image.id}>
               <div>
-                {image.urls?.small ? (
-                  <img src={image.urls.small} alt={image.alt_description} />
-                ) : (
-                  <p>No images available</p>
-                )}
+                <ImageCard image={image} />
               </div>
             </li>
           ))

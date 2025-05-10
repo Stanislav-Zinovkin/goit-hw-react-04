@@ -1,8 +1,12 @@
 import React from "react";
-const ImageCard = () => {
+const ImageCard = ({ image }) => {
   return (
     <div>
-      <img src="" alt="" />
+      {image.urls?.small ? (
+        <img src={image.urls.small} alt={image.alt_description} />
+      ) : (
+        <p>No images available</p>
+      )}
     </div>
   );
 };
