@@ -1,15 +1,27 @@
 import React from "react";
+import styles from "./ImageCard.module.css";
 const ImageCard = ({ image, onImageClick }) => {
   return (
-    <div>
+    <div
+      className={styles.card}
+      tabIndex={0}
+      onClick={() => onImageClick(image.urls.full)}
+    >
       {image.urls?.small ? (
-        <img
-          src={image.urls.small}
-          alt={image.alt_description}
-          onClick={() => onImageClick(image.urls.regular)}
-        />
+        <>
+          <img
+            className={styles.item}
+            src={image.urls.small}
+            alt={image.alt_description}
+          />
+
+          <div className={styles.overlay}>
+            <p>❤️ {image.likes}</p>
+            <p>📸 {image.user.name}</p>
+          </div>
+        </>
       ) : (
-        <p>No images available</p>
+        <p className={styles.paragraph}>No images available</p>
       )}
     </div>
   );
