@@ -3,15 +3,22 @@ import axios from "axios";
 import Loader from "./components/Loader/Loader";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import SearchBar from "./components/SearchBar/SearchBar";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
+import LoadMore from "./components/loadMoreBtn/LoadMore";
+import ImageModal from "./components/ImageModal/ImageModal";
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [gallery, setGallery] = useState([]);
   const [query, setQuery] = useState("");
+  const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalImageUrl, setModalImageUrl] = useState(null);
   const myApiKey = "QZISFSen2b0BM38Ec0hNTK8ZDw23fcBV4MezLamP5Uc";
 
   useEffect(() => {
-    if (query === "") return;
+    if (!query) return;
 
     async function fetchGallery() {
       try {
@@ -22,28 +29,47 @@ function App() {
             headers: {
               Authorization: `Client-ID ${myApiKey}`,
             },
-            params: { query: query },
+            params: { query: query, page: page },
           }
         );
-        setGallery(response.data.results);
+
+        setGallery((prevGallery) => [...prevGallery, ...response.data.results]);
       } catch (error) {
-        console.log("Error fetching gallery:", error);
+        setError(error.message);
       } finally {
         setLoading(false);
       }
     }
     fetchGallery();
-  }, [query]);
+  }, [query, page]);
 
   const handleSubmit = (newQuery) => {
     setQuery(newQuery);
+  };
+  const openModal = (imageUrl) => {
+    setModalIsOpen(true);
+    setModalImageUrl(imageUrl);
+  };
+  const closeModal = () => {
+    setModalIsOpen(false);
   };
 
   return (
     <div>
       <SearchBar onSubmit={handleSubmit} />
       <Loader loading={loading} />
-      <ImageGallery gallery={gallery} />
+      <ImageGallery gallery={gallery} onImageClick={openModal} />
+      <ErrorMessage error={error} />
+      <LoadMore
+        loading={loading}
+        gallery={gallery}
+        handleLoadMore={() => setPage((prevPage) => prevPage + 1)}
+      />
+      <ImageModal
+        isOpen={modalIsOpen}
+        imageUrl={modalImageUrl}
+        onClose={closeModal}
+      />
     </div>
   );
 }
