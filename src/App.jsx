@@ -47,6 +47,8 @@ function App() {
 
   const handleSubmit = (newQuery) => {
     setQuery(newQuery);
+    setGallery([]);
+    setPage(1);
   };
   const openModal = (imageUrl) => {
     setModalIsOpen(true);
