@@ -35,7 +35,11 @@ function App() {
           }
         );
 
-        setGallery((prevGallery) => [...prevGallery, ...response.data.results]);
+        setGallery((prevGallery) =>
+          page === 1
+            ? response.data.results
+            : [...prevGallery, ...response.data.results]
+        );
       } catch (error) {
         setError(error.message);
       } finally {
