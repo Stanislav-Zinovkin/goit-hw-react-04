@@ -5,7 +5,7 @@ const ImageCard = ({ image, onImageClick }) => {
     <div
       className={styles.card}
       tabIndex={0}
-      onClick={() => onImageClick(image.urls.full)}
+      onClick={() => onImageClick(image.urls.regular)}
     >
       {image.urls?.small ? (
         <>
