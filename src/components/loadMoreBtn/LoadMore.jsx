@@ -1,4 +1,5 @@
 import React from "react";
+
 import styles from "./LoadMore.module.css";
 const LoadMore = ({ loading, gallery, handleLoadMore }) => {
   return (

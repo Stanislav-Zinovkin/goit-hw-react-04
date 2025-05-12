@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Loader from "./components/Loader/Loader";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
@@ -16,6 +16,8 @@ function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalImageUrl, setModalImageUrl] = useState(null);
   const myApiKey = "QZISFSen2b0BM38Ec0hNTK8ZDw23fcBV4MezLamP5Uc";
+
+  const prevPageRef = useRef(1);
 
   useEffect(() => {
     if (!query) return;
@@ -53,6 +55,18 @@ function App() {
   const closeModal = () => {
     setModalIsOpen(false);
   };
+
+  useEffect(() => {
+    if (page > 1 && page !== prevPageRef.current) {
+      setTimeout(() => {
+        window.scrollBy({
+          top: 1000,
+          behavior: "smooth",
+        });
+      }, 300);
+      prevPageRef.current = page;
+    }
+  }, [page]);
 
   return (
     <div>
