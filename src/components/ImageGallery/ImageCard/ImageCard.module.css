@@ -32,8 +32,9 @@
   transition: all 0.3s ease;
   font-size: 14px;
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 7px;
 }
 
 .card:hover .overlay,

@@ -11,7 +11,7 @@ const ImageModal = ({ isOpen, imageUrl, onClose }) => {
       className={styles.content}
       overlayClassName={styles.overlay}
     >
-      <div>
+      <div className={styles.wrapper}>
         <img src={imageUrl} alt="Large image" />
       </div>
     </Modal>
