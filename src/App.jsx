@@ -4,7 +4,7 @@ import Loader from "./components/Loader/Loader";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import SearchBar from "./components/SearchBar/SearchBar";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
-import LoadMore from "./components/loadMoreBtn/LoadMore";
+import LoadMore from "./components/loadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
 
 function App() {

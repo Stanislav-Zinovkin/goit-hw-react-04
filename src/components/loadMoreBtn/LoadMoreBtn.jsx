@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./LoadMore.module.css";
+import styles from "./LoadMoreBtn.module.css";
 const LoadMore = ({ loading, gallery, handleLoadMore }) => {
   return (
     <>
